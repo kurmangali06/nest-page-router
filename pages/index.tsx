@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import { Button, Htag, P } from '../components'
+import { Button, Htag, P, Tag } from '../components'
 
 
 
@@ -15,6 +15,7 @@ export default function Home(): JSX.Element {
       <Button appearance='ghost' arrow='down'>asdas</Button>
       <Button appearance='primary' arrow='right'>asdas</Button>
       <P size='l'> sasfas</P>
+      <Tag size='m' color='primary'>asdasdfas</Tag>
     </div>
   )
 }
