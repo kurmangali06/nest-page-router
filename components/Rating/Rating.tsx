@@ -24,8 +24,8 @@ export const Rating = ({ isEditable = false, rating,  setRating, ...props }: Rat
 					onMouseLeave={() => changeDisplay(rating)}
 					onClick={() => onClick(i + 1)}>
 					<StarIcon 
-						tabIndex={isEditable ? 0 : -1}
-						onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && handleSpace(i + 1, e )}
+						// tabIndex={isEditable ? 0 : -1}
+						// onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && handleSpace(i + 1, e )}
 						/>
 				</span>
 			)
