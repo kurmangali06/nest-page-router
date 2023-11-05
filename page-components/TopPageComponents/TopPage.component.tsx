@@ -1,4 +1,4 @@
-import { Advantages, Card, HhData,  Htag, P, Sort, Tag } from "../../components";
+import { Advantages, Card, HhData,  Htag, P, Product, Sort, Tag } from "../../components";
 import { TopPageComponentProps } from "./TopPage.component.props";
 import styles from './TopPage.component.module.css'
 import { TopLevelCategory } from "../../interface/page.interface";
@@ -19,30 +19,28 @@ export const TopPageComponent = ({page, products, firstCategory, ...props }: Top
 	return (
         <div className={styles.wrapper}>
             <div className={styles.title}>
-                <Htag tag="h1">{page.title}</Htag>
+                <Htag tag="h1">{page?.title}</Htag>
                 {products && <Tag color="grey" size="m">{products.length}</Tag>}
                 <Sort sort={sort} setSort={setSort}/>
             </div>
             <div>
                 { sortedProducts && sortedProducts.map(p => (
-                    <div key={p._id}>
-                        {p.title}
-                    </div>
+                    <Product key={p._id} product={p} />
                 ))}
             </div>
             <div className={styles.hhTitle}>
-                <Htag tag="h2"> Вакансий - {page.category}</Htag>
+                <Htag tag="h2"> Вакансий - {page?.category}</Htag>
                 <Tag color="red" size="m">hh.kz</Tag>
             </div>
               {firstCategory == TopLevelCategory.Courses && page.hh && <HhData {...page.hh}/>}
-              {page.advantages && page.advantages.length > 0 && <div className={styles.advantage}>
+              {page?.advantages && page.advantages.length > 0 && <div className={styles.advantage}>
                 <Htag tag="h2">Преимущества</Htag>
                 <Advantages advantages={page.advantages}/>
               </div>}
 
-              { page.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{__html: page.seoText}}/>  }
+              { page?.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{__html: page?.seoText}}/>  }
                 <Htag tag="h2">Получаемые навыки</Htag>
-                {page.tags.map(t => <Tag key={t} color="primary" >{t} </Tag>)}  
+                {page?.tags && page.tags.map(t => <Tag key={t} color="primary" >{t} </Tag>)}  
         </div>
 
 	);
