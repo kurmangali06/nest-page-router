@@ -13,7 +13,6 @@ import { MenuItem } from '../interface/menu.interface'
 const inter = Inter({ subsets: ['latin'] })
 
 function Home({ menu }: HomeProps): JSX.Element {
-  const [rating, setRating] = useState<number>(4)
   return (
     <div>
         <Input placeholder='text'/>
