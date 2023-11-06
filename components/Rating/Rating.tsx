@@ -1,11 +1,14 @@
+
 import { RatingProps } from './Rating.props';
 import styles from './Rating.module.css';
 import cn from 'classnames';
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { ForwardedRef, KeyboardEvent, forwardRef, useEffect, useState } from 'react';
 import StarIcon from './star.svg'
+import { Span } from 'next/dist/trace';
 
-export const Rating = ({ isEditable = false, rating,  setRating, ...props }: RatingProps): JSX.Element => {
-	const [ ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>))
+// eslint-disable-next-line react/display-name
+export const Rating = forwardRef(({ isEditable = false, error, rating,  setRating, ...props }: RatingProps, ref:ForwardedRef<HTMLDivElement>): JSX.Element => {
+	const [ ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
 
 	useEffect(()=> {
 		constructRating(rating)
@@ -24,8 +27,6 @@ export const Rating = ({ isEditable = false, rating,  setRating, ...props }: Rat
 					onMouseLeave={() => changeDisplay(rating)}
 					onClick={() => onClick(i + 1)}>
 					<StarIcon 
-						// tabIndex={isEditable ? 0 : -1}
-						// onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && handleSpace(i + 1, e )}
 						/>
 				</span>
 			)
@@ -49,8 +50,11 @@ export const Rating = ({ isEditable = false, rating,  setRating, ...props }: Rat
 		setRating(i)
 	}
 	return (
-		<div {...props}>
+		<div {...props} ref={ref} className={cn(styles.ratingWrapper, {
+			[styles.error]: error
+		})}>
 			{ratingArray.map((r,i) => (<span key={i}>{r}</span>))}
+			{error && <span className={styles.errorMessage}>{error.message}</span>}
 		</div>
 	);
-};
+});
